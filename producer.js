@@ -7,7 +7,7 @@ process.argv.forEach(function (val, index, array) {
 });
 
 var maxRecipientCount = parseInt(process.argv[2]);
-console.log("Max send count: " + maxRecipientCount);
+console.log("Max recipient count: " + maxRecipientCount);
 
 var messageCount = parseInt(process.argv[3]);
 console.log("Message Count: " + messageCount);
@@ -40,7 +40,7 @@ function send() {
         for(var c = 0; c < recipientSize; c++) {
             // random recipients
             var r = getRandomInt(0, maxTotalRecipients);
-            channel.publish(ex, r, new Buffer(msg));
+            channel.publish(ex, r.toString(), new Buffer(msg));
         }
     }
 
