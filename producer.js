@@ -6,12 +6,14 @@ process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
 
-var exCount = parseInt(process.argv[2]);
-console.log("Exchange Count: " + exCount);
+var maxRecipientCount = parseInt(process.argv[2]);
+console.log("Max send count: " + maxRecipientCount);
 
-var queueCount = exCount * 3;
+var messageCount = parseInt(process.argv[3]);
+console.log("Message Count: " + messageCount);
 
-var sendCount = parseInt(process.argv[3]);
+var maxTotalRecipients = parseInt(process.argv[4]);
+console.log("Total recipient count: " + maxTotalRecipients);
 
 var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0';
 var channel;
@@ -26,14 +28,23 @@ var conn = [
 */
 
 function send() {
-    var val = randomString(10000); // Trying to 24kb
-    for(var i = 0; i < sendCount; i++) {
+    var msg = randomString(10000); // Trying to hit 24kb
+    var ex = 'app';
 
-        var exi = getRandomInt(0, exCount);
-        var ex = "ex-" + exi;
-        var msg = val;
+    for(var i = 0; i < messageCount; i++) {
 
-        channel.publish(ex, '', new Buffer(msg));
+        // let's send to a random group, of a random size
+        // Random size:
+        var recipientSize = getRandomInt(0, maxRecipientCount);
+
+        var recipients = [];
+        for(var c = 0; c < recipientSize; c++) {
+            // random recipients
+            var r = getRandomInt(0, maxTotalRecipients);
+            recipients.push(r.toString());
+        }
+
+        channel.publish(ex, recipients, new Buffer(msg));
     }
 
     console.log(" [x] Sent " + sendCount + " messages");
@@ -54,11 +65,7 @@ function randomString(length) {
 
 function init(ch) {
     ch.assertExchange('app', 'direct', {durable: false});
-    
-    for(var i = 0; i < exCount; i++) {
-        var ex = "ex-" + i;
-        ch.assertExchange(ex, 'fanout', {durable: false});
-    }
+
 
     setTimeout(function() {
         setInterval(send, 500);
