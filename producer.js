@@ -40,7 +40,7 @@ function send() {
         for(var c = 0; c < recipientSize; c++) {
             // random recipients
             var r = getRandomInt(0, maxTotalRecipients);
-	    console.log("[y] Sending message to " + r);
+	    // console.log("[y] Sending message to " + r);
             channel.publish(ex, r.toString(), new Buffer(msg));
         }
     }
