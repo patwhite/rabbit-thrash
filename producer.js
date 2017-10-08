@@ -37,14 +37,11 @@ function send() {
         // Random size:
         var recipientSize = getRandomInt(0, maxRecipientCount);
 
-        var recipients = [];
         for(var c = 0; c < recipientSize; c++) {
             // random recipients
             var r = getRandomInt(0, maxTotalRecipients);
-            recipients.push(r.toString());
+            channel.publish(ex, r, new Buffer(msg));
         }
-
-        channel.publish(ex, recipients, new Buffer(msg));
     }
 
     console.log(" [x] Sent " + sendCount + " messages");
