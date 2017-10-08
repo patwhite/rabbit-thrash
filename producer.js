@@ -43,8 +43,8 @@ function send() {
             channel.publish(ex, r.toString(), new Buffer(msg));
         }
     }
-
-    console.log(" [x] Sent " + sendCount + " messages");
+    
+    console.log(" [x] Sent " + messageCount + " messages");
 }
 
 function getRandomInt(min, max) {
