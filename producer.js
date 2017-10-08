@@ -53,6 +53,8 @@ function randomString(length) {
 }
 
 function init(ch) {
+    ch.assertExchange('app', 'direct', {durable: false});
+    
     for(var i = 0; i < exCount; i++) {
         var ex = "ex-" + i;
         ch.assertExchange(ex, 'fanout', {durable: false});
@@ -60,7 +62,7 @@ function init(ch) {
 
     setTimeout(function() {
         setInterval(send, 500);
-    }, 10000);
+    }, 100);
 
 
     console.log("Finished asserting " + exCount + " exchanges.");
