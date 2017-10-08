@@ -7,14 +7,17 @@ var queueCount = exCount * 3;
 
 var sendCount = parseInt(process.argv[1]);
 
+var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0';
 var channel;
 
+/*
 var conn = [
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-1',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-2',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-3',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-4'];
+*/
 
 function send() {
     var val = randomString(10000); // Trying to 24kb
