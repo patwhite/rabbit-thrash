@@ -25,7 +25,7 @@ function init(ch) {
             ch.bindQueue(q.queue, ex, whoami);
 
             ch.consume(q.queue, function(msg) {
-                console.log(" [x] %s", msg.content.toString());
+//                console.log(" [x] %s", msg.content.toString());
             }, {noAck: true});
         });
     }
