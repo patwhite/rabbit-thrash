@@ -58,7 +58,10 @@ function init(ch) {
         ch.assertExchange(ex, 'fanout', {durable: false});
     }
 
-    setInterval(send, 500);
+    setTimeout(function() {
+        setInterval(send, 500);
+    }, 10000);
+
 
     console.log("Finished asserting " + exCount + " exchanges.");
 }
