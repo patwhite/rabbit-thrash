@@ -72,7 +72,7 @@ function init(ch) {
     }, 100);
 
 
-    console.log("Finished asserting " + exCount + " exchanges.");
+    console.log("Finished asserting exchanges.");
 }
 
 amqp.connect(conn, function(err, conn) {
