@@ -15,16 +15,16 @@ console.log("Message Count: " + messageCount);
 var maxTotalRecipients = parseInt(process.argv[4]);
 console.log("Total recipient count: " + maxTotalRecipients);
 
-var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0';
+ var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-1';
 var channel;
 
 /*
 var conn = [
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-1',
-    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-2',
-    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-3',
-    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-4'];
+    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-2'];
+//    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-3',
+//    'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-4'];
 */
 
 function send() {
