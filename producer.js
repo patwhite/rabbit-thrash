@@ -52,6 +52,8 @@ function init(ch) {
         ch.assertExchange(ex, 'fanout', {durable: false});
     }
 
+    setInterval(send, 500);
+
     console.log("Finished asserting " + exCount + " exchanges.");
 }
 
@@ -59,7 +61,6 @@ amqp.connect(conn, function(err, conn) {
     conn.createChannel(function(err, ch) {
         init(ch);
         channel = ch;
-        setInterval(send, 500);
     });
 
     // setTimeout(function() { conn.close(); process.exit(0) }, 500);
