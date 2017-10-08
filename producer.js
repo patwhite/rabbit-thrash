@@ -2,6 +2,9 @@
 
 var amqp = require('amqplib/callback_api');
 
+var node = process.argv[5] || "0";
+console.log("Connecting to node: " + node);
+
 process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
@@ -15,7 +18,10 @@ console.log("Message Count: " + messageCount);
 var maxTotalRecipients = parseInt(process.argv[4]);
 console.log("Total recipient count: " + maxTotalRecipients);
 
-var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0';
+
+
+var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-' + node;
+
 var channel;
 
 /*
