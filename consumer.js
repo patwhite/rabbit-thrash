@@ -18,7 +18,7 @@ function init(ch) {
     for(var i = 0; i < connectCount; i++) {
         const whoami = getRandomInt(0, maxTotalRecipients).toString();
 
-        ch.assertQueue(whoami, {expires: 300000}, function(err, q) {
+        ch.assertQueue(whoami, {expires: 60000}, function(err, q) {
 
             console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q.queue);
 
