@@ -7,6 +7,8 @@ var queueCount = exCount * 3;
 
 var sendCount = parseInt(process.argv[1]);
 
+var channel;
+
 var conn = [
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0',
     'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-1',
@@ -22,7 +24,7 @@ function send() {
         var ex = "ex-" + exi;
         var msg = val;
 
-        ch.publish(ex, '', new Buffer(msg));
+        channel.publish(ex, '', new Buffer(msg));
     }
 
     console.log(" [x] Sent ", sendCount, " messages");
@@ -53,7 +55,8 @@ function init(ch) {
 amqp.connect(conn, function(err, conn) {
     conn.createChannel(function(err, ch) {
         init(ch);
-        setInterval(send(ch), 500);
+        channel = ch;
+        setInterval(send, 500);
     });
 
     // setTimeout(function() { conn.close(); process.exit(0) }, 500);
