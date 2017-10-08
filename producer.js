@@ -2,10 +2,16 @@
 
 var amqp = require('amqplib/callback_api');
 
-var exCount = parseInt(process.argv[0]);
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});
+
+var exCount = parseInt(process.argv[2]);
+console.log("Exchange Count: " + exCount);
+
 var queueCount = exCount * 3;
 
-var sendCount = parseInt(process.argv[1]);
+var sendCount = parseInt(process.argv[3]);
 
 var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-0';
 var channel;
@@ -30,7 +36,7 @@ function send() {
         channel.publish(ex, '', new Buffer(msg));
     }
 
-    console.log(" [x] Sent ", sendCount, " messages");
+    console.log(" [x] Sent " + sendCount + " messages");
 }
 
 function getRandomInt(min, max) {
