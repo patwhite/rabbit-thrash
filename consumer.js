@@ -5,7 +5,7 @@ var amqp = require('amqplib/callback_api');
 var node = process.argv[4] || "0";
 console.log("Connecting to node: " + node);
 
-var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-' + node;
+var conn = 'amqp://user:y5tfC5jiVawg@rabbitmq-cluster-2-node-' + node;
 var channel;
 
 

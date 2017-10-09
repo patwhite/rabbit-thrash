@@ -18,7 +18,7 @@ console.log("Message Count: " + messageCount);
 var maxTotalRecipients = parseInt(process.argv[4]);
 console.log("Total recipient count: " + maxTotalRecipients);
 
-var conn = 'amqp://user:BGJLo2pmiyx5@rabbitmq-cluster-1-node-' + node;
+var conn = 'amqp://user:y5tfC5jiVawg@rabbitmq-cluster-2-node-' + node;
 
 var channel;
 
