@@ -15,24 +15,25 @@ console.log("Connection count: " + connectCount);
 var maxTotalRecipients = parseInt(process.argv[3]);
 console.log("Total recipient count: " + maxTotalRecipients);
 
+function setupQueue(ch, i) {
+    const whoami = getRandomInt(0, maxTotalRecipients).toString();
+
+    ch.assertQueue(whoami, {expires: 60000}, function(err, q) {
+        console.log("[" + i + "] Waiting for messages in %s. To exit press CTRL+C", q.queue);
+
+        ch.bindQueue(q.queue, ex, whoami);
+
+        ch.consume(q.queue, function(msg) {
+        }, {noAck: true});
+    });
+}
+
 function init(ch) {
     var ex = 'app';
     ch.assertExchange(ex, 'direct', {durable: false});
 
     for(var i = 0; i < connectCount; i++) {
-        const whoami = getRandomInt(0, maxTotalRecipients).toString();
-
-        ch.assertQueue(whoami, {expires: 60000}, function(err, q) {
-
-            console.log("[" + i + "] Waiting for messages in %s. To exit press CTRL+C", q.queue);
-            // console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q.queue);
-
-            ch.bindQueue(q.queue, ex, whoami);
-
-            ch.consume(q.queue, function(msg) {
-//                console.log(" [x] %s", msg.content.toString());
-            }, {noAck: true});
-        });
+       setupQueue(ch, i);
     }
 
     console.log("Finished asserting and binding.");
