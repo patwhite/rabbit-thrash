@@ -24,7 +24,7 @@ function init(ch) {
 
         ch.assertQueue('', {expires: 60000, exclusive: true}, function(err, q) {
 
-            console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q.queue);
+            console.log("[" + i + "] Waiting for messages in %s. To exit press CTRL+C", q.queue);
 
             ch.bindQueue(q.queue, ex, whoami);
 
